@@ -1,0 +1,49 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% include "header.html" %}
+
+<!-- Page Header-->
+<header
+  class="masthead"
+  style="background-image: url('../static/assets/img/library_pic.jpg')"
+>
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="page-heading">
+          <h1>My Books</h1>
+          <span class="subheading">The list of all the books I have issued.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<table class="table">
+	<tr>
+		<th>Book ID</th>
+		<th>Title</th>
+		<th>Author</th>
+		<th>Return</th>
+	</tr>
+
+
+
+
+	{% for book in books %}
+	<tr>
+		<td>{{ book.id }}</td>
+		<td>{{ book.title }}</td>
+		<td>{{ book.author }}</td>
+		<td>
+            <a href="{{ url_for('return_book', book_id=book.id, user_id=current_user.id) }}" class="btn btn-primary">Return</a>
+        </td>
+    </tr>
+	{% endfor %}
+
+
+
+</table>
+
+
+
+{% include "footer.html" %}

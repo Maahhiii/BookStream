@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-{% from "bootstrap5/form.html" import render_form %}
+{% include "header.html" %}
+
+    <!-- Page Header-->
+<header class="masthead"
+        style="background-image: url('../static/assets/img/user_img.jpg')">
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="page-heading">
+          <h1>Users</h1>
+          <span class="subheading">The list of all registered users.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<table class="table">
+	<tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+    </tr>
+
+	<!-- here is a for-loop to give us all the socks -->
+
+
+	 {% for user in users %}
+    <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+    </tr>
+    {% endfor %}
+
+
+
+</table>
+
+
+
+{% include "footer.html" %}
+

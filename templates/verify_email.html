@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Send Verification Email</title>
+    <!-- Include your CSS and other header content -->
+</head>
+<body>
+    {% include "header.html" %}
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('../static/assets/img/contact.jpg')">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="page-heading">
+                        <h1>Verify Your Email</h1>
+                        <span class="subheading">Enter your email to receive a verification link.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="mb-4">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <form action="{{ url_for('send_verification_email') }}" method="POST">
+                        <div class="form-floating">
+                            <input class="form-control" id="email" name="email" type="email" placeholder="Enter your email..." required />
+                            <label for="email">Email</label>
+                        </div>
+                        <br />
+                        <button class="btn btn-primary text-uppercase" type="submit">Send Verification Link</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    {% include "footer.html" %}
+</body>
+</html>

@@ -1,0 +1,73 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% include "header.html" %}
+
+<!-- Page Header-->
+<header
+  class="masthead"
+  style="background-image: url('../static/assets/img/library_pic.jpg')"
+>
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="page-heading">
+          <h1>Stream of Books</h1>
+          <span class="subheading">The list of all the books we have.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<table class="table">
+	<tr>
+		<th>Book ID</th>
+		<th>Book Title</th>
+		<th>Book Author</th>
+
+		<th>Issue</th>
+		{% if current_user.id == 1: %}
+		<th>Issued By</th>
+		<th>Delete</th>
+		{% endif %}
+
+	</tr>
+
+
+	{% for book in books %}
+	<tr>
+		<td>{{ book.id }}</td>
+		<td>{{ book.title }}</td>
+		<td>{{ book.author }}</td>
+
+		{% if book.available == "Yes": %}
+		<td class="ml-4"><a href="{{ url_for('issue_book', book_id=book.id, user_id=current_user.id) }}" class="btn btn-secondary">Issue</a></td>
+		{% endif %}
+
+		{% if book.available == "No": %}
+		<td>Not Available</td>
+		{% endif %}
+
+		<td>
+            {% if book.available == "No" and current_user.id == 1 %}
+                {{ book.issued_to[0].name }}
+            {% elif book.available == "Yes" and current_user.id == 1 %}
+                -
+            {% endif %}
+        </td>
+
+		{% if current_user.id == 1: %}
+		<td class="ml-4"><a href="{{ url_for('delete_book', book_id=book.id) }}" class="btn btn-secondary">Delete</a></td>
+
+
+		{% endif %}
+
+
+
+
+	</tr>
+	{% endfor %}
+</table>
+
+
+
+{% include "footer.html" %}
